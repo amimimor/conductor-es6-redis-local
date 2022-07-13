@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: conductor-ui
-          image: conductor-ui
+          image: conductor:ui
           env:
             - name: WF_SERVER
               value: "http://conductor-server.conductor.svc.cluster.local:8080/api/"
