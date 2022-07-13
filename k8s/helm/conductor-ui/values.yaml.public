@@ -1,0 +1,12 @@
+kubernetesClusterDomain: cluster.local
+ui:
+  conductorUi:
+    image:
+      repository: conductor
+      tag: ui
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 5000
+  replicas: 1
+  type: NodePort

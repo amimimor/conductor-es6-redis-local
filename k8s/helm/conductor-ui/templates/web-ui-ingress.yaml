@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "conductor-ui.fullname" . }}-web-ui-ingress
+  labels:
+  {{- include "conductor-ui.labels" . | nindent 4 }}
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: instance
+    kubernetes.io/ingress.class: alb
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          service:
+            name: '{{ include "conductor-ui.fullname" . }}-ui'
+            port:
+              number: 80
+        path: /
+        pathType: Prefix

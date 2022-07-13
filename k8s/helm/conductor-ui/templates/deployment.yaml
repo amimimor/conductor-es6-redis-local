@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "conductor-ui.fullname" . }}-ui
+  labels:
+    app: conductor-ui
+  {{- include "conductor-ui.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.ui.replicas }}
+  selector:
+    matchLabels:
+      app: conductor-ui
+    {{- include "conductor-ui.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        app: conductor-ui
+      {{- include "conductor-ui.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - env:
+        - name: WF_SERVER
+          value: http://conductor-server.conductor.svc.cluster.local:8080/api/
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ .Values.kubernetesClusterDomain }}
+        image: {{ .Values.ui.conductorUi.image.repository }}:{{ .Values.ui.conductorUi.image.tag | default .Chart.AppVersion }}
+        name: conductor-ui
+        ports:
+        - containerPort: 5000
+          name: conductor-ui
+        resources: {}
+      restartPolicy: Always
