@@ -2,6 +2,7 @@
 
 # prevent accidentally checking in conductor
 conductor
+conductor-community
 **/values.yaml
 **/private.yaml
 **/private
