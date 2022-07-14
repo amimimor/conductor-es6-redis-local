@@ -1,0 +1,36 @@
+diff --git a/conductor/docker/server/Dockerfile b/conductor/docker/server/Dockerfile
+index 15a6d6e..0009ea6 100644
+--- a/conductor/docker/server/Dockerfile
++++ b/conductor/docker/server/Dockerfile
+@@ -1,5 +1,5 @@
+ #
+-# conductor:server - Netflix conductor server
++# conductor-community:server - Netflix conductor community server
+ #
+
+ # ===========================================================================================================
+@@ -27,11 +27,12 @@ LABEL maintainer="Netflix OSS <conductor@netflix.com>"
+ RUN mkdir -p /app/config /app/logs /app/libs
+
+ # Copy the compiled output to new image
+-COPY --from=builder /conductor/docker/server/bin /app
+-COPY --from=builder /conductor/docker/server/config /app/config
+-COPY --from=builder /conductor/server/build/libs/conductor-server-*-boot.jar /app/libs
++COPY --from=builder /conductor/docker/bin /app
++COPY --from=builder /conductor/docker/config /app/config
++COPY --from=builder /conductor/community-server/build/libs/conductor-community-server-*-boot.jar /app/libs
+
+ # Copy the files for the server into the app folders
++RUN cp /app/startup-community.sh /app/startup.sh
+ RUN chmod +x /app/startup.sh
+
+ HEALTHCHECK --interval=60s --timeout=30s --retries=10 CMD curl -I -XGET http://localhost:8080/health || exit 1
+@@ -14,7 +14,7 @@ COPY . /conductor
+ WORKDIR /conductor
+
+ # Build the server on run
+-RUN ./gradlew build -x test --stacktrace
++RUN ./gradlew bootJar -x test --stacktrace
+
+ # ===========================================================================================================
+ # 1. Bin stage

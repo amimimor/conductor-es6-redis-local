@@ -11,15 +11,19 @@ rm -rf conductor-community/
 
 # Get Conductor
 git clone -c advice.detachedHead=false -c core.autocrlf=false --depth 1 -b ${CONDUCTOR_VERSION} https://github.com/Netflix/conductor.git ./conductor
-
+git apply ./${CONDUCTOR_VERSION}-update-dockerfile.patch
+cd conductor
+git commit -a -m "Applied patches on conductor"
+cd ..
 # Get Conductor Community
 git clone -c advice.detachedHead=false -c core.autocrlf=false --depth 1 -b ${CONDUCTOR_VERSION} https://github.com/Netflix/conductor-community.git ./conductor-community
 
 cd conductor-community
 
 # Delete dependencies.lock files
-rm -f **/dependencies.lock
-rm -f ./dependencies.lock
+# rm -f **/dependencies.lock
+# rm -f ./dependencies.lock
+
 
 mkdir -p docker
 cp  ../conductor/docker/server/Dockerfile ./docker/
