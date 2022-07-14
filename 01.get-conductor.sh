@@ -1,6 +1,6 @@
 #!/bin/sh
 
-CONDUCTOR_VERSION=v3.9.2
+CONDUCTOR_VERSION=v3.10.0
 
 # Display commands and exit on error
 set -ex 
