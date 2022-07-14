@@ -1,0 +1,40 @@
+diff --git a/community-server/build.gradle b/community-server/build.gradle
+index 0d30a58..ae0dc16 100644
+--- a/community-server/build.gradle
++++ b/community-server/build.gradle
+@@ -10,6 +10,7 @@ dependencies {
+     implementation "com.netflix.conductor:conductor-redis-persistence:${revConductor}"
+     implementation "com.netflix.conductor:conductor-cassandra-persistence:${revConductor}"
+     implementation "com.netflix.conductor:conductor-es6-persistence:${revConductor}"
++    implementation "com.netflix.conductor:conductor-es7-persistence:${revConductor}"
+     implementation "com.netflix.conductor:conductor-grpc-server:${revConductor}"
+     implementation "com.netflix.conductor:conductor-redis-lock:${revConductor}"
+     implementation "com.netflix.conductor:conductor-redis-concurrency-limit:${revConductor}"
+diff --git a/community-server/src/main/resources/application.properties b/community-server/src/main/resources/application.properties
+index e76a4d2..5f5eac3 100644
+--- a/community-server/src/main/resources/application.properties
++++ b/community-server/src/main/resources/application.properties
+@@ -54,8 +54,8 @@ conductor.elasticsearch.url=localhost:9300
+ conductor.elasticsearch.indexName=conductor
+ 
+ #Elasticsearch major release version.
+-conductor.elasticsearch.version=6
+-#conductor.elasticsearch.version=7
++#conductor.elasticsearch.version=6
++conductor.elasticsearch.version=7
+ 
+ # Default event queue type to listen on for wait task
+ conductor.default-event-queue.type=sqs
+diff --git a/dependencies.gradle b/dependencies.gradle
+index dfd6fdd..9e65c17 100644
+--- a/dependencies.gradle
++++ b/dependencies.gradle
+@@ -12,7 +12,7 @@ ext {
+     revCommonsIo = '2.7'
+     revCuratorRecipes = '2.4.0'
+     revCuratorTest = '2.4.0'
+-    revElasticSearch7 = '7.6.2'
++    revElasticSearch7 = '7.10.2'
+     revEmbeddedRedis = '0.6'
+     revEurekaClient = '1.10.10'
+     revGroovy = '2.5.13'
