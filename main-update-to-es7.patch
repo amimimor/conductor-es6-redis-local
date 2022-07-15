@@ -25,16 +25,3 @@ index e76a4d2..5f5eac3 100644
  
  # Default event queue type to listen on for wait task
  conductor.default-event-queue.type=sqs
-diff --git a/dependencies.gradle b/dependencies.gradle
-index dfd6fdd..9e65c17 100644
---- a/dependencies.gradle
-+++ b/dependencies.gradle
-@@ -12,7 +12,7 @@ ext {
-     revCommonsIo = '2.7'
-     revCuratorRecipes = '2.4.0'
-     revCuratorTest = '2.4.0'
--    revElasticSearch7 = '7.6.2'
-+    revElasticSearch7 = '7.10.2'
-     revEmbeddedRedis = '0.6'
-     revEurekaClient = '1.10.10'
-     revGroovy = '2.5.13'

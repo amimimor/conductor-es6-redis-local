@@ -3,7 +3,7 @@ version: '2.3'
 services:
   conductor-server:
     environment:
-      - CONFIG_PROP=config-local.properties
+      - CONFIG_PROP=config-local-community.properties
       - ELASTICSEARCH_URL=http://es:9200
     image: conductor-community:server
     networks:

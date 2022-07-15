@@ -1,6 +1,6 @@
 #!/bin/sh
 
-CONDUCTOR_VERSION=main
+CONDUCTOR_VERSION=v3.10.0
 
 # Display commands and exit on error
 set -ex 
@@ -28,7 +28,11 @@ cd conductor-community
 mkdir -p docker
 cp  ../conductor/docker/server/Dockerfile ./docker/
 # overwrite the non community files that are shared across the projects
-cp -rf ../docker/* ./docker/
+cp -rf ../docker/bin ./docker/bin
+# make sure we are not using the irrelevant startup script
+rm ./docker/bin/startup.sh
+cp -rf ../docker/config ./docker/config
+
 
 # Apply patches
 # Update to es7 (postgres is built in community)
