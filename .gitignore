@@ -6,3 +6,4 @@ conductor-*
 values.yaml
 **/private.yaml
 **/private
+redis-minikube.yaml
