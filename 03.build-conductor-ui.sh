@@ -1,5 +1,7 @@
 #!/bin/sh
 
+CONDUCTOR_VERSION=$1
+
 # Display commands and exit on error
 set -ex 
 
@@ -7,6 +9,7 @@ die () {
     echo >&2 "$@"
     exit 1
 }
+
 
 [ "$#" -eq 1 ] || die "1 argument is required specifying conductor tag in the format of vX.Y.Z, $# provided; for example: ./03.build-conductor-ui.sh v3.10.0"
 
