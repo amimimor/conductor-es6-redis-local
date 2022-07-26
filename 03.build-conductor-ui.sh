@@ -1,7 +1,5 @@
 #!/bin/sh
 
-CONDUCTOR_VERSION=$1
-
 # Display commands and exit on error
 set -ex 
 

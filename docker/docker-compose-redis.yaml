@@ -1,5 +1,4 @@
 version: '2.3'
-
 services:
   redis:
     image: redis:6.2-alpine
@@ -14,7 +13,7 @@ services:
      - REDIS_REPLICATION_MODE=master
 
   conductor-server:
-    image: conductor-server-es6-redis:v3.10.0
+    image: conductor-server:es6-${START_TYPE}-${CONDUCTOR_VERSION}
     volumes:
       - $PWD/config/config-redis.properties:/props/injected.properties
     depends_on:
