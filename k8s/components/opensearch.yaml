@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: elasticsearch
+  namespace: conductor
+  labels:
+    app: elasticsearch
+spec:
+  selector:
+    matchLabels:
+      app: elasticsearch
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: elasticsearch
+    spec:
+      containers:
+        - name: elasticsearch
+          image: opensearchproject/opensearch:latest
+          env:
+            - name: "ES_JAVA_OPTS"
+              value: "-Xms512m -Xmx1024m"
+            - name: transport.host
+              value: "0.0.0.0"
+            - name: discovery.type
+              value: "single-node"
+          ports:
+            - containerPort: 9200
+              name: http
+            - containerPort: 9600
+              name: kibana
+            - containerPort: 9300
+              name: custom
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: elasticsearch
+  namespace: conductor
+spec:
+  selector:
+    app: elasticsearch
+  type: ClusterIP
+  ports:
+    - name: http
+      protocol: TCP
+      port: 9200
+    - name: kibana 
+      protocol: TCP
+      port: 9600
